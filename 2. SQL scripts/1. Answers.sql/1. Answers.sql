@@ -12,9 +12,32 @@ select count(city) as Total_properties from [property24].[dbo].[PropertyData]
 select count(FLOOR_SIZE) as Total_properties from [property24].[dbo].[PropertyData]
 
 --2. How many properties are listed in each province?
+
+select ([province]),
+
+count([province]) as No_of_Properties
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+
+
 --3. How many properties are listed in each city?
+
+select ([CITY]),
+
+count([province]) as No_of_Properties
+from [property24].[dbo].[PropertyData]
+group by [city]
+
 --4. How many properties have more than 2 bedrooms?
+
+select count(*) as No_of_Properties_with_3plus_Bedrooms 
+from [property24].[dbo].[PropertyData] where BEDROOMS > 2
+
 --5. How many properties have 2 or more bathrooms?
+
+select count(*) as No_of_Properties_with_2plus_Bathrooms
+from [property24].[dbo].[PropertyData] where BATHROOMS >= 2
+
 --6. How many properties have parking for at least 2 cars?
 --7. How many properties are priced above R3,000,000?
 --8. How many properties are in Gauteng?
