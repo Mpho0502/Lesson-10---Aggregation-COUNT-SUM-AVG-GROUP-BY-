@@ -55,8 +55,21 @@ from [property24].[dbo].[PropertyData] where PROVINCE='Gauteng'
 
 --9. How many properties per province have floor size greater than 200?
 
+select ([PROVINCE]),
+
+count([FLOOR_SIZE]) as No_of_Properties_with_floor_size_greater_than_200
+from [property24].[dbo].[PropertyData]
+where FLOOR_SIZE > 200
+group by [PROVINCE]
 
 --10. How many distinct provinces are in the table?
+
+select [PROVINCE],
+count(distinct PROVINCE) as No_of_distinct_provinces
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+
+
 
 
 --SECTION 2 � SUM Aggregations (10 Questions)
@@ -70,6 +83,7 @@ from [property24].[dbo].[PropertyData] where PROVINCE='Gauteng'
 --18. What is the total property value for Gauteng?
 --19. What is the total property value for properties priced above R4,000,000?
 --20. What is the total minimum gross monthly income required per province?
+
 --SECTION 3 � AVG Aggregations (10 Questions)
 --21. What is the average property price overall?
 --22. What is the average property price per province?
@@ -81,6 +95,7 @@ from [property24].[dbo].[PropertyData] where PROVINCE='Gauteng'
 --28. What is the average once-off cost per province?
 --29. What is the average minimum gross monthly income per province?
 --30. What is the average property price for properties above R3,000,000?
+
 --SECTION 4 � GROUP BY + Filtering (10 Questions)
 --31. Which province has the highest average property price?
 --32. Which province has the lowest average property price?
