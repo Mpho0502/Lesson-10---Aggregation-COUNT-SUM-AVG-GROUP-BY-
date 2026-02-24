@@ -223,14 +223,89 @@ where [PROPERTY_PRICE] >= 3000000;
 
 
 --SECTION 4 � GROUP BY + Filtering (10 Questions)
+
 --31. Which province has the highest average property price?
+
+select top 1 ([PROVINCE]),
+avg(cast([PROPERTY_PRICE] as bigint)) as highest_average_property_price
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by highest_average_property_price desc;
+
 --32. Which province has the lowest average property price?
+
+select top 1 ([PROVINCE]),
+avg(cast([PROPERTY_PRICE] as bigint)) as lowest_average_property_price
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by lowest_average_property_price asc;
+
 --33. Which city has the highest total property value?
+
+select top 1 ([CITY]),
+sum(cast([PROPERTY_PRICE] as bigint)) as highest_total_property_value
+from [property24].[dbo].[PropertyData]
+group by [CITY]
+order by highest_total_property_value desc;
+
 --34. Which city has the lowest average property price?
+
+select top 1 ([CITY]),
+avg(cast([PROPERTY_PRICE] as bigint)) as highest_total_property_value
+from [property24].[dbo].[PropertyData]
+group by [CITY]
+order by highest_total_property_value asc;
+
 --35. How many properties per province are priced above R2,000,000?
+
+select ([PROVINCE]),
+count(*) as no_of_properties_above_2000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 2000000
+group by [PROVINCE]
+order by no_of_properties_above_2000000 desc;
+
 --36. What is the average floor size per province for properties above R3,000,000?
+
+select([PROVINCE]),
+avg(cast([FLOOR_SIZE] as int)) as average_floor_size_for_properties_above_3000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 3000000
+group by [PROVINCE]
+order by average_floor_size_for_properties_above_3000000 desc;
+
 --37. What is the total property value per province for properties with 3 or more bedrooms?
+
+select([PROVINCE]),
+sum(cast([PROPERTY_PRICE] as bigint)) as total_property_value_for_properties_with_3_or_more_bedrooms
+from [property24].[dbo].[PropertyData]
+where [BEDROOMS] >= 3
+group by [PROVINCE]
+order by total_property_value_for_properties_with_3_or_more_bedrooms desc;
+
 --38. What is the average monthly repayment per province for properties above R4,000,000?
+
+select [PROVINCE],
+avg(cast([Monthly_Repayment] as bigint)) as average_monthly_repayment_per_province_above_4000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 4000000
+group by [PROVINCE]
+order by average_monthly_repayment_per_province_above_4000000;
+
 --39. How many properties per city have parking for 2 or more cars?
+
+select ([CITY]),
+count (*) as properties_per_city_with_parking_for_2_or_more_cars
+from [property24].[dbo].[PropertyData]
+where [PARKING] >= 2
+group by [CITY]
+order by properties_per_city_with_parking_for_2_or_more_cars desc;
+
 --40. What is the average minimum gross monthly income per province for properties above R5,000,000?
 
+select [PROVINCE],
+avg([Min_Gross_Monthly_Income]) as average_minimum_gross_monthly_income_per_province_above_5000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 5000000
+group by [PROVINCE]
+order by average_minimum_gross_monthly_income_per_province_above_5000000 desc;
