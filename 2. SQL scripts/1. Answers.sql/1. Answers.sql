@@ -5,6 +5,7 @@
 --SECTION 1 � COUNT Aggregations (10 Questions)
 -- ============================================
 select * from [property24].[dbo].[PropertyData]
+
 --1. How many total properties are in the database?
 
 select count(*) as Total_Properties from [property24].[dbo].[PropertyData]
@@ -14,16 +15,13 @@ select count(FLOOR_SIZE) as Total_properties from [property24].[dbo].[PropertyDa
 --2. How many properties are listed in each province?
 
 select ([province]),
-
 count([province]) as No_of_Properties
 from [property24].[dbo].[PropertyData]
 group by [PROVINCE]
 
-
 --3. How many properties are listed in each city?
 
 select ([CITY]),
-
 count([province]) as No_of_Properties
 from [property24].[dbo].[PropertyData]
 group by [city]
@@ -56,7 +54,6 @@ from [property24].[dbo].[PropertyData] where PROVINCE='Gauteng'
 --9. How many properties per province have floor size greater than 200?
 
 select ([PROVINCE]),
-
 count([FLOOR_SIZE]) as No_of_Properties_with_floor_size_greater_than_200
 from [property24].[dbo].[PropertyData]
 where FLOOR_SIZE > 200
@@ -70,21 +67,83 @@ from [property24].[dbo].[PropertyData]
 group by [PROVINCE]
 
 
-
-
 --SECTION 2 � SUM Aggregations (10 Questions)
+
 --11. What is the total value of all properties combined?
+
+select
+sum(cast([PROPERTY_PRICE] as bigint)) as total_value_of_all_properties
+from [property24].[dbo].[PropertyData];
+
 --12. What is the total property value per province?
+
+select ([PROVINCE]),
+sum(cast([PROPERTY_PRICE] as bigint)) as total_property_value_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by total_property_value_per_province desc;
+
 --13. What is the total property value per city?
+
+select ([CITY]),
+sum(cast([PROPERTY_PRICE] as bigint)) as total_property_value_per_city
+from [property24].[dbo].[PropertyData]
+group by [CITY]
+order by total_property_value_per_city desc;
+
 --14. What is the total monthly repayment for all properties?
+
+select
+sum(cast([Monthly_Repayment] as bigint)) as total_monthly_repayment_for_all_properties
+from  [property24].[dbo].[PropertyData];
+
 --15. What is the total monthly repayment per province?
+
+select ([PROVINCE]),
+sum(cast([Monthly_Repayment]  as bigint)) as total_monthly_repayment_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by total_monthly_repayment_per_province desc;
+
 --16. What is the total once-off cost for all properties?
+
+select
+sum(cast([Total_Once_off_Costs] as bigint)) as total_once_off_cost_for_all_properties
+from [property24].[dbo].[PropertyData];
+
 --17. What is the total once-off cost per province?
+
+select ([PROVINCE]),
+sum(cast([Total_Once_off_Costs] as bigint)) as total_once_off_cost_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by total_once_off_cost_per_province desc;
+
 --18. What is the total property value for Gauteng?
+
+select
+sum(cast([PROPERTY_PRICE] as bigint)) as total_property_value_for_Gauteng
+from [property24].[dbo].[PropertyData]
+where [PROVINCE] = 'Gauteng';
+
 --19. What is the total property value for properties priced above R4,000,000?
+
+select
+sum(cast([PROPERTY_PRICE] as bigint)) as total_value_for_properties_priced_above_4000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 4000000;
+
 --20. What is the total minimum gross monthly income required per province?
 
+select ([PROVINCE]),
+sum(cast([Min_Gross_Monthly_Income] as bigint)) as total_minimum_gross_monthly_income_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by total_minimum_gross_monthly_income_per_province desc;
+
+
 --SECTION 3 � AVG Aggregations (10 Questions)
+
 --21. What is the average property price overall?
 --22. What is the average property price per province?
 --23. What is the average property price per city?
