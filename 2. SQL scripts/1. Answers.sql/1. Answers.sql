@@ -100,7 +100,7 @@ from  [property24].[dbo].[PropertyData];
 --15. What is the total monthly repayment per province?
 
 select ([PROVINCE]),
-sum(cast([Monthly_Repayment]  as bigint)) as total_monthly_repayment_per_province
+sum(cast([Monthly_Repayment] as bigint)) as total_monthly_repayment_per_province
 from [property24].[dbo].[PropertyData]
 group by [PROVINCE]
 order by total_monthly_repayment_per_province desc;
@@ -145,15 +145,82 @@ order by total_minimum_gross_monthly_income_per_province desc;
 --SECTION 3 � AVG Aggregations (10 Questions)
 
 --21. What is the average property price overall?
+
+select
+avg(cast([PROPERTY_PRICE] as bigint)) as average_property_price
+from[property24].[dbo].[PropertyData];
+
 --22. What is the average property price per province?
+
+select ([PROVINCE]),
+avg(cast([PROPERTY_PRICE] as bigint)) as average_property_value_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_property_value_per_province desc;
+
 --23. What is the average property price per city?
+
+select ([CITY]),
+avg(cast([PROPERTY_PRICE] as bigint)) as average_property_value_per_city
+from [property24].[dbo].[PropertyData]
+group by [CITY]
+order by average_property_value_per_city desc;
+
 --24. What is the average number of bedrooms per province?
+
+select ([PROVINCE]),
+avg(cast([BEDROOMS] as int)) as average_number_of_bedrooms_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_number_of_bedrooms_per_province desc;
+
 --25. What is the average number of bathrooms per province?
+
+select ([PROVINCE]),
+avg(cast([BATHROOMS] as int)) as average_number_of_bathrooms_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_number_of_bathrooms_per_province desc;
+
 --26. What is the average floor size per province?
+
+select ([PROVINCE]),
+avg(cast([FLOOR_SIZE] as int)) as average_floor_size_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_floor_size_per_province desc;
+
 --27. What is the average monthly repayment per province?
+
+select ([PROVINCE]),
+avg(cast([Monthly_Repayment] as int)) as average_monthly_repayment_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_monthly_repayment_per_province desc;
+
 --28. What is the average once-off cost per province?
+
+select ([PROVINCE]),
+avg(cast([Total_Once_off_Costs] as bigint)) as average_once_off_cost_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_once_off_cost_per_province desc;
+
 --29. What is the average minimum gross monthly income per province?
+
+select ([PROVINCE]),
+avg(cast([Min_Gross_Monthly_Income] as bigint)) as average_minimum_gross_monthly_income_per_province
+from [property24].[dbo].[PropertyData]
+group by [PROVINCE]
+order by average_minimum_gross_monthly_income_per_province desc;
+
 --30. What is the average property price for properties above R3,000,000?
+
+select
+avg(cast([PROPERTY_PRICE] as bigint)) as average_property_price_for_properties_priced_above_3000000
+from [property24].[dbo].[PropertyData]
+where [PROPERTY_PRICE] >= 3000000;
+
 
 --SECTION 4 � GROUP BY + Filtering (10 Questions)
 --31. Which province has the highest average property price?
